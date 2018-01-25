@@ -18,6 +18,9 @@ export default class Teams extends Component {
       }))
     })
   }
+  // when path match the url, we render a team, when Team mounts
+  // we fetch the team id from the props passed to it and render its
+  // children prop function passing in a team id
   render() {
     const { loading, teamNames } = this.state
     const { location, match } = this.props
