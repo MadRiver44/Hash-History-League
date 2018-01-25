@@ -44,6 +44,21 @@ export default class Teams extends Component {
                   ) : (
                     <div style={{ width: '100%' }}>
                       <TeamLogo id={team.id} className="center" />
+                      <h1 className="medium-header">{team.name}</h1>
+                      <ul className="info-list row">
+                        <li>
+                          Established <div>{team.established}</div>{' '}
+                        </li>
+                        <li>
+                          Manager <div>{team.manager}</div>{' '}
+                        </li>
+                        <li>
+                          Coach <div>{team.coach}</div>{' '}
+                        </li>
+                      </ul>
+                      <Link className="center btn-main" to={`/${match.params.teamId}`}>
+                        {team.name} Team PAGE
+                      </Link>
                     </div>
                   )}
               </Team>
