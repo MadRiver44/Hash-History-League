@@ -27,6 +27,8 @@ export default class Players extends Component {
   }
   render() {
     // {..this.props} Routing props (location, history, and  match go to Sidebar also
+    // if no player is selected return null else if a player is selected, match the route
+    // extract player info, display info, create Link to team
     const { players, loading } = this.state
     const { match, location } = this.props
     return (
