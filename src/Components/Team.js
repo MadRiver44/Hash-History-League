@@ -13,6 +13,7 @@ export default class Team extends Component {
   componentDidMount() {
     this.fetchTeam(this.props.id)
   }
+  // when we select a new team, new props are passed
   componentWillReceiveProps(nextProps) {
     if (this.props.id !== nextProps.id) {
       this.fetchTeam(nextProps.id)
