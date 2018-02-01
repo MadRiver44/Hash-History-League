@@ -2,7 +2,7 @@ import React, { Component } from 'react'
 import TeamLogo from './TeamLogo'
 import { Link } from 'react-router-dom'
 import { getTeamNames } from '../api'
-
+import Loading from './Loading'
 export default class Home extends Component {
   state = {
     teamNames: [],
