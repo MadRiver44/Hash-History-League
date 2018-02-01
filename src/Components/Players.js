@@ -4,6 +4,7 @@ import Sidebar from './Sidebar'
 import { getPlayers } from '../api'
 import { parse } from 'query-string'
 import slug from 'slug'
+import { TransitionGroup, CSSTransition } from 'react-transition-group'
 
 export default class Players extends Component {
   state = {
@@ -29,6 +30,7 @@ export default class Players extends Component {
     // {..this.props} Routing props (location, history, and  match go to Sidebar also
     // if no player is selected return null else if a player is selected, match the route
     // extract player info, display info, create Link to team
+    // we have access to location because location is passed in this.props
     const { players, loading } = this.state
     const { match, location } = this.props
     return (
@@ -51,42 +53,45 @@ export default class Players extends Component {
             const { name, position, teamId, number, avatar, apg, ppg, rpg, spg } = players.find(
               player => slug(player.name) === match.params.playerId,
             )
-
             return (
-              <div className="panel">
-                <img className="avatar" src={`${avatar}`} alt={`${name}'s avatar`} />
-                <h1 className="medium-header">{name}</h1>
-                <h3 className="header">#{number}</h3>
-                <div className="row">
-                  <ul className="info-list" style={{ marginRight: 80 }}>
-                    <li>
-                      Team
-                      <div>
-                        <Link style={{ color: '#68809a' }} to={`/${teamId}`}>
-                          {teamId[0].toUpperCase() + teamId.slice(1)}
-                        </Link>
-                      </div>
-                    </li>
-                    <li>
-                      Position<div>{position}</div>
-                    </li>
-                    <li>
-                      PPG<div>{ppg}</div>
-                    </li>
-                  </ul>
-                  <ul className="info-list">
-                    <li>
-                      APG<div>{apg}</div>
-                    </li>
-                    <li>
-                      SPG<div>{spg}</div>
-                    </li>
-                    <li>
-                      RPG<div>{rpg}</div>
-                    </li>
-                  </ul>
-                </div>
-              </div>
+              <TransitionGroup className="panel">
+                <CSSTransition key={location.key} timeout={250} classNames="fade">
+                  <div className="panel">
+                    <img className="avatar" src={`${avatar}`} alt={`${name}'s avatar`} />
+                    <h1 className="medium-header">{name}</h1>
+                    <h3 className="header">#{number}</h3>
+                    <div className="row">
+                      <ul className="info-list" style={{ marginRight: 80 }}>
+                        <li>
+                          Team
+                          <div>
+                            <Link style={{ color: '#68809a' }} to={`/${teamId}`}>
+                              {teamId[0].toUpperCase() + teamId.slice(1)}
+                            </Link>
+                          </div>
+                        </li>
+                        <li>
+                          Position<div>{position}</div>
+                        </li>
+                        <li>
+                          PPG<div>{ppg}</div>
+                        </li>
+                      </ul>
+                      <ul className="info-list">
+                        <li>
+                          APG<div>{apg}</div>
+                        </li>
+                        <li>
+                          SPG<div>{spg}</div>
+                        </li>
+                        <li>
+                          RPG<div>{rpg}</div>
+                        </li>
+                      </ul>
+                    </div>
+                  </div>
+                </CSSTransition>
+              </TransitionGroup>
             )
           }}
         />
