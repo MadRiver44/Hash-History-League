@@ -2,6 +2,7 @@ import React from 'react'
 import PropTypes from 'prop-types'
 import { Link, Route } from 'react-router-dom'
 import slug from 'slug' //makes items snake cased
+import Loading from './Loading'
 
 Sidebar.propTypes = {
   title: PropTypes.string.isRequired,
@@ -28,7 +29,7 @@ function CustomLink({ to, children }) {
 //{item.toUpperCase()} {/*player name links*/}
 export default function Sidebar({ title, list, loading, location, match }) {
   return loading === true ? (
-    <h1>LOADING</h1>
+    <Loading />
   ) : (
     <div>
       <h3 className="header">{title}</h3>
